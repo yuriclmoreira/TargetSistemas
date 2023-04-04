@@ -24,16 +24,73 @@ function Fibonacci() {
     }
   }
   sequencia.innerHTML =
-    "<h1> A sequencia de fibonacci de " +
+    "<h3> A sequencia de fibonacci de " +
     numero +
     " elementos é: <br>" +
     fibonacci +
-    "</h1>";
+    "</h3>";
   if (fibonacci.find((number) => number === numero)) {
     resposta.innerHTML =
-      "<h2>O número selecionado está na sequencia de fibonacci.</h2>";
+      "<h3>O número selecionado está na sequencia de fibonacci.</h3>";
   } else {
     resposta.innerHTML =
-      "<h2>O número selecionado não esta na sequencia de fibonacci.</h2>";
+      "<h3>O número selecionado não esta na sequencia de fibonacci.</h3>";
   }
+}
+/*
+3) Dado um vetor que guarda o valor de faturamento diário de uma distribuidora, faça um programa, na linguagem que desejar, que calcule e retorne:
+• O menor valor de faturamento ocorrido em um dia do mês;
+• O maior valor de faturamento ocorrido em um dia do mês;
+• Número de dias no mês em que o valor de faturamento diário foi superior à média mensal.
+
+IMPORTANTE:
+a) Usar o json ou xml disponível como fonte dos dados do faturamento mensal;
+b) Podem existir dias sem faturamento, como nos finais de semana e feriados. Estes dias devem ser ignorados no cálculo da média;*/
+async function getValores(valores) {
+  try {
+    const response = await fetch("dados.json");
+    const json = await response.json();
+    valores.length = 0; // Limpa o array
+    json.forEach((item) => valores.push(item.valor)); // Preenche o array com os valores
+  } catch (error) {
+    console.error(error);
+  }
+}
+async function Faturamento() {
+  let valores = [];
+  var respostaFaturamento = document.getElementById("respostaFaturamento");
+  let contador = 0;
+
+  await getValores(valores);
+
+  const arrayFiltrado = valores.filter((valor) => valor !== 0);
+
+  const maiorValor = arrayFiltrado.reduce(function (prev, current) {
+    return prev > current ? prev : current;
+  });
+
+  const menorValor = arrayFiltrado.reduce(function (prev, current) {
+    return prev < current ? prev : current;
+  });
+
+  const media =
+    arrayFiltrado.reduce((acumulador, valor) => acumulador + valor, 0) /
+    arrayFiltrado.length;
+
+  for (let i = 0; i < arrayFiltrado.length; i++) {
+    if (arrayFiltrado[i] > media) {
+      contador++;
+    }
+  }
+
+  respostaFaturamento.innerHTML =
+    "<h3>O maior valor é: " +
+    maiorValor +
+    "<br>" +
+    "O menor valor é:" +
+    menorValor +
+    "<br>" +
+    "O número de valores que ultrapasou  a media foi :" +
+    contador +
+    "</h3>";
 }
