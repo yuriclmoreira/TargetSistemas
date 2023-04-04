@@ -9,7 +9,7 @@ function Fibonacci() {
 
   if (numero === 0) {
     resposta.innerHTML =
-      "Não é possivel criar uma sequencia de fibonacci com 0 elementos por favor insira um novo numero no campo acima.";
+      "Não é possível criar uma sequência de Fibonacci com 0 elementos. Por favor, insira um novo número no campo acima.";
   } else if (numero === 1) {
     fibonacci[0] = 0;
   } else {
@@ -20,17 +20,17 @@ function Fibonacci() {
     }
   }
   sequencia.innerHTML =
-    "<h3> A sequencia de fibonacci de " +
+    "<h3> A sequência de fibonacci de " +
     numero +
     " elementos é: <br>" +
     fibonacci +
     "</h3>";
   if (fibonacci.find((number) => number === numero)) {
     resposta.innerHTML =
-      "<h3>O número selecionado está na sequencia de fibonacci.</h3>";
+      "<h3>O número selecionado está na sequência de fibonacci.</h3>";
   } else {
     resposta.innerHTML =
-      "<h3>O número selecionado não esta na sequencia de fibonacci.</h3>";
+      "<h3>O número selecionado não está na sequência de fibonacci.</h3>";
   }
 }
 /* --------------------------------3-------------------------------- */
@@ -72,15 +72,15 @@ async function Faturamento() {
   }
 
   respostaFaturamento.innerHTML =
-    "<h3>O maior valor é: " +
+    "<p>O maior valor é: " +
     maiorValor +
     "<br>" +
     "O menor valor é:" +
     menorValor +
     "<br>" +
-    "O número de valores que ultrapasou  a media foi :" +
+    "O número de valores que ultrapassou a media foi :" +
     contador +
-    "</h3>";
+    "</p>";
 }
 /* --------------------------------4-------------------------------- */
 
@@ -108,4 +108,24 @@ function Percentual() {
   html += "</ul>";
 
   respostaPercentual.innerHTML = html;
+}
+/* --------------------------------5-------------------------------- */
+
+function Inverter() {
+  var respostaInverter = document.getElementById("respostaInverter");
+  const palavra = document.getElementById("palavra").value;
+
+  let reverse = "";
+
+  for (let i = palavra.length - 1; i >= 0; i--) {
+    reverse += palavra[i];
+  }
+  console.log(reverse);
+  if (reverse) {
+    respostaInverter.innerHTML =
+      "<h3>A palavra invertida é:  " + reverse + "</h3>";
+  } else {
+    respostaInverter.innerHTML =
+      "<h3>Digite uma palavra para ser invertida.</h3>";
+  }
 }
